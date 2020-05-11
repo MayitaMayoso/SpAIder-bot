@@ -40,7 +40,7 @@ public class CityGenerator : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown("space")) {
+        if (Input.GetKeyDown(KeyCode.Period)) {
             foreach (Transform child in transform) {
                 GameObject.Destroy(child.gameObject);
             }
