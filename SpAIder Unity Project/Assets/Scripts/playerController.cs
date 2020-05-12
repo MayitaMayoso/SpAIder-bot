@@ -40,8 +40,9 @@ public class playerController : MonoBehaviour
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
 
+        Debug.Log("Holaaa");
+
         playerInput = Vector3.ClampMagnitude( new Vector3(horizontalMove, 0, verticalMove), 1);
-        camDirection();
 
         playerMove = playerInput.z * camForward;
         playerMove *= playerSpeed;
@@ -49,33 +50,8 @@ public class playerController : MonoBehaviour
         playerRotation *= playerRotationSpeed;
         player.transform.LookAt(player.transform.position + camForward + playerRotation);
 
-        setGravity();
         playerSkills();
         player.Move(playerMove * Time.deltaTime);
-    }
-
-    public void camDirection() {
-
-        camForward = mainCamera.transform.forward;
-        camRight = mainCamera.transform.right;
-
-        camForward.y = 0;
-        camRight.y = 0;
-
-        camForward = camForward.normalized;
-        camRight = camRight.normalized;
-    }
-
-    public void setGravity() {
-        if (player.isGrounded) {
-            fallSpeed = -gravity * Time.deltaTime;
-            playerMove.y = fallSpeed;
-        } else {
-            fallSpeed -= gravity * Time.deltaTime;
-            playerMove.y = fallSpeed;
-        }
-
-        slideDown();
     }
 
     public void playerSkills() {
@@ -83,16 +59,5 @@ public class playerController : MonoBehaviour
             fallSpeed = jumpForce;
             playerMove.y = fallSpeed;
         }
-    }
-
-    public void slideDown() {
-        isOnSlope = Vector3.Angle(Vector3.up, hitVectorNormal) >= player.slopeLimit;
-        if (isOnSlope) {
-            playerMove.x += hitVectorNormal.x * playerSlideSpeed;
-            playerMove.z += hitVectorNormal.z * playerSlideSpeed;
-        }
-    }
-    private void OnControllerColliderHit(ControllerColliderHit hit) {
-        hitVectorNormal = hit.normal;
     }
 }
