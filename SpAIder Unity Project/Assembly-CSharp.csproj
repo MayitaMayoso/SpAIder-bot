@@ -70,7 +70,9 @@
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\CityGenerator.cs" />
     <Compile Include="Assets\Scripts\LegPosUpdate.cs" />
-    <Compile Include="Assets\Scripts\playerController.cs" />
+    <Compile Include="Assets\Scripts\Testing.cs" />
+    <Compile Include="Assets\Scripts\TokenManager.cs" />
+    <Compile Include="Assets\Scripts\WallSensor.cs" />
     <None Include="Assets\FastIK\Documentation.txt" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>C:/Users/molin/Desktop/SpAIder-bot/SpAIder Unity Project/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>

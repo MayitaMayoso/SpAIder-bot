@@ -18,6 +18,8 @@ public class CityGenerator : MonoBehaviour {
     public GameObject Road3;
     public GameObject Road4;
     public GameObject[] Houses;
+    public GameObject Token;
+    public float TokenProb = 0.1f;
 
 
     [Range(0, 3)]
@@ -159,13 +161,21 @@ public class CityGenerator : MonoBehaviour {
                             break;
                     }
 
+                    if ( UnityEngine.Random.value < TokenProb ) {
+                        Instantiate(Token, new Vector3(xStart + tileSize * j, 2, zStart + tileSize * i), Quaternion.identity).transform.parent = gameObject.transform;
+                    }
+
                     Instantiate(currentTile, new Vector3(xStart + tileSize * j, 0, zStart + tileSize * i), Quaternion.Euler(0, tileAngle, 0)).transform.parent = gameObject.transform;
                 } else {
                     Instantiate(NoRoad, new Vector3(xStart + tileSize * j, 0, zStart + tileSize * i), Quaternion.identity).transform.parent = gameObject.transform;
-                    if (Houses.Length > 0 && j>0 && j<cityHeight-1 && i>0 && i<cityWidth-1) {
-                        int tileType = cityGrid[j, i + 1] + cityGrid[j + 1, i + 1] + cityGrid[j + 1, i] + cityGrid[j + 1, i - 1] + cityGrid[j, i - 1] + cityGrid[j - 1, i - 1] + cityGrid[j - 1, i] + cityGrid[j - 1, i + 1];
-                        if (tileType > 0)
+                    if (Houses.Length > 0) {
+                        if (j > 0 && j < cityHeight - 1 && i > 0 && i < cityWidth - 1) {
+                            int tileType = cityGrid[j, i + 1] + cityGrid[j + 1, i + 1] + cityGrid[j + 1, i] + cityGrid[j + 1, i - 1] + cityGrid[j, i - 1] + cityGrid[j - 1, i - 1] + cityGrid[j - 1, i] + cityGrid[j - 1, i + 1];
+                            if (tileType > 0)
+                                Instantiate(Houses[UnityEngine.Random.Range(0, Houses.Length)], new Vector3(xStart + tileSize * j, 0, zStart + tileSize * i), Quaternion.identity).transform.parent = gameObject.transform;
+                        } else {
                             Instantiate(Houses[UnityEngine.Random.Range(0, Houses.Length)], new Vector3(xStart + tileSize * j, 0, zStart + tileSize * i), Quaternion.identity).transform.parent = gameObject.transform;
+                        }
                     }
                 }
             }
