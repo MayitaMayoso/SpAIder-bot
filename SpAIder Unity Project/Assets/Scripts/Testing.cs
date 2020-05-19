@@ -8,6 +8,19 @@ using UnityEngine.TestTools;
 
 public class Testing : MonoBehaviour
 {
+	public class testing
+	{
+
+
+		public float initX;
+		public float initY;
+		public float initZ;
+		public float initRotX;
+		public float initRotY;
+		public float initRotZ;
+		public float tolerance;
+	}
+
 	public GameObject spider;
 
 	public bool enableTesting = true;
@@ -51,20 +64,54 @@ public class Testing : MonoBehaviour
 	private void FixedUpdate() {
 		if (enableTesting) {
 
+			testing t = new testing();
+			float Timer;
+			float currentTime = Time.timeSinceLevelLoad * 1000f;
 
 			if (!isTesting) {
 				switch (test) {
 					case 0:
-						beginForwardTest();
+						beginForwardTest(t);
 						isTesting = true;
 						Timer = currentTime + 5000;
 						break;
+					case 1:
+						beginRotationRightTest(t);
+						isTesting = true;
+						Timer = currentTime + 5000;
+						break;
+					case 2:
+						beginRotationTotalTest(t);
+						isTesting = true;
+						Timer = currentTime + 5000;
+						break;
+					case 3:
+						beginRotationLeftTest(t);
+						isTesting = true;
+						Timer = currentTime + 5000;
+						break;
+
 				}
 			} else {
 				if ( Timer < currentTime ) {
 					switch (test) {
 						case 0:
-							endForwardTest();
+							endForwardTest(t);
+							isTesting = false;
+							test++;
+							break;
+						case 1:
+							endRotationRightTest(t);
+							isTesting = false;
+							test++;
+							break;
+						case 2:
+							endRotationTotalTest(t);
+							isTesting = false;
+							test++;
+							break;
+						case 3:
+							endRotationLeftTest(t);
 							isTesting = false;
 							test++;
 							break;
@@ -90,106 +137,137 @@ public class Testing : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha7)) spider.GetComponent<BasicMovement>().setState(STATE.MANUAL_CONTROL);
 	}
 
-	private void testMovementForward(){
+	private void beginForwardTest(testing t) {
+
 		Debug.Log("Movement forward at rotation 0");
-
-
-		float initX = spider.transform.position.x;
-		float initY = spider.transform.position.y;
-		float initZ = spider.transform.position.z;
-		float initRotX = spider.transform.eulerAngles.x;
-		float initRotY = spider.transform.eulerAngles.y;
-		float initRotZ = spider.transform.eulerAngles.x;
-		float tolerance = 0.21f;
+		// start 
+		t.initX = spider.transform.position.x;
+		t.initY = spider.transform.position.y;
+		t.initZ = spider.transform.position.z;
+		t.initRotX = spider.transform.eulerAngles.x;
+		t.initRotY = spider.transform.eulerAngles.y;
+		t.initRotZ = spider.transform.eulerAngles.x;
+		t.tolerance = 0.21f;
 
 		//Spider functions
 		bm.setState(STATE.MOVING);
 
-		//Spider test
-		//Looking at the x variable
-		Assert.IsTrue(spider.transform.position.x > initX);
-		//Looking at the y variable
-		Assert.IsTrue(spider.transform.position.y == initY);
-		//Looking at the z variable
-		Assert.IsTrue(spider.transform.position.z == initZ);
+	}
 
-		Debug.Log("Movement forward at rotation 90");
-		initX = spider.transform.position.x;
-		initY = spider.transform.position.y;
-		initZ = spider.transform.position.z;
-		initRotX = spider.transform.eulerAngles.x;
-		initRotY = spider.transform.eulerAngles.y;
-		initRotZ = spider.transform.eulerAngles.x;
-
-		//Rotate it 90 degrees
-		bm.right_rotation_state();
-		bm.rotating_state();
-		bm.fixing_position();
-
-		//Spider functions
-		bm.moving_state();
-		bm.move();
-
+	private void endForwardTest( testing t ) {
 
 		//Spider test
 		//Looking at the x variable
-		Assert.AreApproximatelyEqual(spider.transform.position.x, initX, tolerance);
+		Assert.IsTrue(spider.transform.position.x > t.initX);
 		//Looking at the y variable
-		Assert.IsTrue(spider.transform.position.y == initY);
+		Assert.IsTrue(spider.transform.position.y == t.initY);
 		//Looking at the z variable
-		Assert.IsTrue(spider.transform.position.z < initZ);
+		Assert.IsTrue(spider.transform.position.z == t.initZ);
 
-		Debug.Log("Movement forward at rotation 180");
-		initX = spider.transform.position.x;
-		initY = spider.transform.position.y;
-		initZ = spider.transform.position.z;
-		initRotX = spider.transform.eulerAngles.x;
-		initRotY = spider.transform.eulerAngles.y;
-		initRotZ = spider.transform.eulerAngles.x;
-
-		//Rotate it 180 degrees
-		bm.right_rotation_state();
-		bm.rotating_state();
-		bm.fixing_position();
-
-		//Spider functions
-
-		bm.moving_state();
-		bm.move();
-
-		//Spider test
-		//Looking at the x variable
-		Assert.IsTrue(spider.transform.position.x < initX);
-		//Looking at the y variable
-		Assert.IsTrue(spider.transform.position.y == initY);
-		//Looking at the z variable
-		Assert.AreApproximatelyEqual(spider.transform.position.z, initZ, tolerance);
-
-
-		Debug.Log("Movement forward at rotation 270");
-		initX = spider.transform.position.x;
-		initY = spider.transform.position.y;
-		initZ = spider.transform.position.z;
-		initRotX = spider.transform.eulerAngles.x;
-		initRotY = spider.transform.eulerAngles.y;
-		initRotZ = spider.transform.eulerAngles.x;
-
-		//Rotate it 270 degrees
-		bm.right_rotation_state();
-		bm.rotating_state();
-		bm.fixing_position();
-
-		//Spider functions
-		bm.moving_state();
-		bm.move();
-		//Spider test
-		//Looking at the x variable
-		Assert.AreApproximatelyEqual(spider.transform.position.x, initX, tolerance);
-		//Looking at the y variable
-		Assert.IsTrue(spider.transform.position.y == initY);
-		//Looking at the z variable
-		Assert.IsTrue(spider.transform.position.z > initZ);
 		Debug.Log("TEST PASSED");
+	}
+
+	private void beginRotationRightTest(testing t) {
+
+		Debug.Log("Movement forward at rotation right");
+		t.initX = spider.transform.position.x;
+		t.initY = spider.transform.position.y;
+		t.initZ = spider.transform.position.z;
+		t.initRotX = spider.transform.eulerAngles.x;
+		t.initRotY = spider.transform.eulerAngles.y;
+		t.initRotZ = spider.transform.eulerAngles.x;
+
+		//Spider functions
+		bm.setState(STATE.RIGHT_ROTATION);
+
+	}
+
+	private void endRotationRightTest(testing t) {
+
+		//Spider test
+		//Looking at the x variable
+		Assert.AreApproximatelyEqual(spider.transform.position.x, t.initX, t.tolerance);
+		//Looking at the y variable
+		Assert.IsTrue(spider.transform.position.y == t.initY);
+		//Looking at the z variable
+		Assert.IsTrue(spider.transform.position.z < t.initZ);
+
+		Debug.Log("TEST PASSED");
+	}
+
+	private void beginRotationTotalTest(testing t) 	{
+
+
+		Debug.Log("Movement forward at rotation total");
+		t.initX = spider.transform.position.x;
+		t.initY = spider.transform.position.y;
+		t.initZ = spider.transform.position.z;
+		t.initRotX = spider.transform.eulerAngles.x;
+		t.initRotY = spider.transform.eulerAngles.y;
+		t.initRotZ = spider.transform.eulerAngles.x;
+
+	
+		//Spider functions
+		bm.setState(STATE.TOTAL_ROTATION);
+
+	}
+
+	private void endRotationTotalTest(testing t) {
+
+
+		//Spider test
+		//Looking at the x variable
+		Assert.IsTrue(spider.transform.position.x < t.initX);
+		//Looking at the y variable
+		Assert.IsTrue(spider.transform.position.y == t.initY);
+		//Looking at the z variable
+		Assert.AreApproximatelyEqual(spider.transform.position.z, t.initZ, t.tolerance);
+
+		Debug.Log("TEST PASSED");
+	}
+
+	private void beginRotationLeftTest(testing t)
+	{
+
+
+		Debug.Log("Movement forward at rotation Left");
+		t.initX = spider.transform.position.x;
+		t.initY = spider.transform.position.y;
+		t.initZ = spider.transform.position.z;
+		t.initRotX = spider.transform.eulerAngles.x;
+		t.initRotY = spider.transform.eulerAngles.y;
+		t.initRotZ = spider.transform.eulerAngles.x;
+
+
+		//Spider functions
+		bm.setState(STATE.LEFT_ROTATION);
+
+	}
+
+	private void endRotationLeftTest(testing t)
+	{
+
+		//Spider test
+		//Looking at the x variable
+		Assert.IsTrue(spider.transform.position.x < t.initX);
+		//Looking at the y variable
+		Assert.IsTrue(spider.transform.position.y == t.initY);
+		//Looking at the z variable
+		Assert.AreApproximatelyEqual(spider.transform.position.z, t.initZ, t.tolerance);
+
+		Debug.Log("TEST PASSED");
+	}
+
+	private void testMovementForward(){
+		Debug.Log("Movement forward at rotation 0");
+
+		
+
+
+
+
+
+	
 
 	}
 	private void testMovementRotateRight(){
