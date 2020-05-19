@@ -23,11 +23,11 @@ public class Testing : MonoBehaviour
 			testMovementForward();	
 			//setSpiderOnInit();
 
-			testMovementRotateLeft();
+			//testMovementRotateLeft();
 			//setSpiderOnInit();
 
 
-			testMovementRotateRight();
+			//testMovementRotateRight();
 			//setSpiderOnInit();
 
 

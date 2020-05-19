@@ -86,7 +86,7 @@ public class BasicMovement : MonoBehaviour
 
 	}
 
-	public void idle_state() {
+	private void idle_state() {
 		bool cColl = centerCollider.GetComponent<WallSensor>().colliding;
 		bool lColl = leftCollider.GetComponent<WallSensor>().colliding;
 		bool rColl = rightCollider.GetComponent<WallSensor>().colliding;
