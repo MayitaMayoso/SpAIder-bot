@@ -50,7 +50,7 @@ public class BasicMovement : MonoBehaviour
 	}
 
 	private void Start() {
-		if ( updateState ) state = STATE.MOVING;
+		if ( updateState ) state = STATE.MANUAL_CONTROL;
 		targetRotation = transform.rotation.eulerAngles.y;
 		lastChoice = transform.position;
 	}

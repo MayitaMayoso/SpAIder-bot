@@ -782,6 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spider: {fileID: 4278056072199453450}
+  enableTesting: 1
 --- !u!4 &415401480
 Transform:
   m_ObjectHideFlags: 0
@@ -4073,7 +4074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc350b0baa739af4cb94f906fa01a405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateState: 0
+  updateState: 1
   movSpeed: 0.3
   rotSpeed: 3
   acceleration: 0.3

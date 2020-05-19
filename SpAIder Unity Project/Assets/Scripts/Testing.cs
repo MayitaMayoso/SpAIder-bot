@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.TestTools;
@@ -9,13 +10,17 @@ public class Testing : MonoBehaviour
 {
 	public GameObject spider;
 
-	public bool isTesting;
+	public bool enableTesting = true;
+	private bool isTesting = false;
 
-	public BasicMovement bm;
+	private BasicMovement bm;
 
 	private void Start(){
 
 		bm = spider.GetComponent<BasicMovement>();
+		bm.updateState = false;
+		
+		/*
 
 		if(isTesting){
 			Debug.Log("-----TESTS-----");
@@ -39,7 +44,34 @@ public class Testing : MonoBehaviour
 
 
 		}
+		*/
 
+	}
+
+	private void FixedUpdate() {
+		if (enableTesting) {
+
+
+			if (!isTesting) {
+				switch (test) {
+					case 0:
+						beginForwardTest();
+						isTesting = true;
+						Timer = currentTime + 5000;
+						break;
+				}
+			} else {
+				if ( Timer < currentTime ) {
+					switch (test) {
+						case 0:
+							endForwardTest();
+							isTesting = false;
+							test++;
+							break;
+					}
+				}
+			}
+		}
 	}
 
 	private void setSpiderOnInit(){
@@ -71,8 +103,7 @@ public class Testing : MonoBehaviour
 		float tolerance = 0.21f;
 
 		//Spider functions
-		bm.moving_state();
-		bm.move();
+		bm.setState(STATE.MOVING);
 
 		//Spider test
 		//Looking at the x variable
