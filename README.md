@@ -24,7 +24,8 @@ Una aranya gegant es troba en una ciutat generada aleatòriament, l’aranya ha 
 
 # Com utilitzar-ho
 
-En pimer lloc s'ha de descarregar el repositori
+En pimer lloc s'ha de descarregar el repositori:
+
 `git clone https://github.com/MayitaMayoso/SpAIder-bot.git`
 
 ## Per executar el programa:
