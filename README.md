@@ -19,13 +19,13 @@ Una aranya gegant es troba en una ciutat generada aleatòriament, l’aranya ha 
 
 # Requisits
 
-- Unity 2019.3.x
+- Unity (> 2019.3.7f1)
 
-# Documentació
-
-Aquest README mostra tota la docmentació existen del projecte.
 
 # Com utilitzar-ho
+
+En pimer lloc s'ha de descarregar el repositori
+`git clone https://github.com/MayitaMayoso/SpAIder-bot.git`
 
 ## Per executar el programa:
 Afegint el projecte com a projecte de Unity a la versió especificada anteriorment hauria de ser suficient per poder executar-lo.
@@ -33,6 +33,7 @@ Afegint el projecte com a projecte de Unity a la versió especificada anteriorme
 Després d'afegir el projecte i obrir-lo, executar el projecte amb el botó superior PLAY posaría en funcionament el programa.
 
 ## Per executar els tests:
+
 S'executen els escenaris de test i autimaticament podem veure per consola o a través de la simulació l'execució de tests.
 
 
@@ -47,6 +48,9 @@ El moviment de l'aranya implica una modificació de la posició de les seves pot
 # Autors
 
 Roger Boadella
+
 Jordi Sanz
+
 Alex Velasco
+
 Agustin Molina
