@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CityGenerator : MonoBehaviour {
 
@@ -48,6 +49,10 @@ public class CityGenerator : MonoBehaviour {
             }
             GenerateCity();
         }
+
+        if (GameObject.FindGameObjectsWithTag("Token").Length == 0 || Input.GetKeyDown(KeyCode.R)) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     private void GenerateCity() {
@@ -65,9 +70,16 @@ public class CityGenerator : MonoBehaviour {
 
         int direction = 0;
         for (int i = 0; i < iterations; i++) {
-            if (drunkMan[0]%2==0 && drunkMan[1]%2==0)
-                if (UnityEngine.Random.value < turnChances)
+            if (drunkMan[0] % 2 == 0 && drunkMan[1] % 2 == 0) {
+                if (UnityEngine.Random.value < turnChances) {
                     direction = UnityEngine.Random.Range(0, 4);
+                }
+                if (UnityEngine.Random.value < centerChances) {
+                    drunkMan[0] = cityWidth / 2;
+                    drunkMan[1] = cityHeight / 2;
+                }
+            }
+
 
             switch (direction) {
                 case 0: drunkMan[0] += 1; break;
@@ -76,7 +88,7 @@ public class CityGenerator : MonoBehaviour {
                 case 3: drunkMan[1] -= 1; break;
             }
 
-            if (drunkMan[0] < 2 || drunkMan[0] > cityWidth-2 || drunkMan[1] < 2 || drunkMan[1] > cityHeight - 2 || UnityEngine.Random.value < centerChances) {
+            if (drunkMan[0] < 2 || drunkMan[0] > cityWidth-2 || drunkMan[1] < 2 || drunkMan[1] > cityHeight - 2) {
                 drunkMan[0] = cityWidth / 2;
                 drunkMan[1] = cityHeight / 2;
             }

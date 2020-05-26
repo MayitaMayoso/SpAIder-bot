@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Scene.unity
+    path: Assets/Scenes/LegsTest.unity
+    guid: c276d85ac60dcce4b89e66d4ac0572e1
+  - enabled: 1
+    path: Assets/Scenes/MovementTest.unity
+    guid: 2d088bd05e0a50142959ea378fb3aeec
+  - enabled: 1
+    path: Assets/Scenes/SensorsTest.unity
+    guid: ae78e1e6737b26948b05daa705146f29
+  - enabled: 1
+    path: Assets/Scenes/Maze.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 1
+    path: Assets/Scenes/MazeCenital.unity
+    guid: ee29a082af639a144ad6b742cf6ba934
   m_configObjects: {}
