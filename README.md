@@ -46,6 +46,10 @@ L'aranya és capaç de recordar cadascun dels encreuaments i quins camins ha exp
 
 El moviment de l'aranya implica una modificació de la posició de les seves potes, simulant el moviment mitjançant un Inverse Kinematics.
 
+# Demo Video
+
+[![Demo Video](https://img.youtube.com/vi/ar1vxgghLL4/0.jpg)](https://www.youtube.com/watch?v=ar1vxgghLL4)
+
 # Autors
 
 Roger Boadella
